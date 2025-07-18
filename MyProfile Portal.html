@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<html dir="ltr">
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><span style="color:red"><b> S/W Eng. Rams Lun</b> </span> </title>
+<link rel="stylesheet" href="Portal css.css">
+    </head>
+    <body>
+<div class="sidebar">
+    <h2>My Profile</h2>
+    <div class="menu-item"onclick="loadSection('dashboard')">Dashboard</div>
+    <div class="menu-item"onclick="loadSection('editProfile')">Edit Profile</div>
+    <div class="menu-item"onclick="loadSection('education')">Education</div>
+    <div class="menu-item"onclick="loadSection('skills')">Skills</div>
+    <div class="menu-item"onclick="loadSection('Work')">Work Experience</div>
+    <div class="menu-item"onclick="loadSection('Contact')">My Contact</div>
+    <div class="menu-item"onclick="loadSection('Portfolio')">Portfolio</div>
+    <div class="menu-item"onclick="loadSection('Settings')">Settings</div>
+  </div>
+
+<div class="main-content" id="mainContent">
+    <h1>Welcome to My Profile Portal</h1>
+    <p>Select a section from the sidebar to view or edit.</p>
+  </div>
+
+  <script>
+const data = {
+    name: "Ramson Lunayo",
+    email: "ramsonlonayo@gmail.com",
+    bio: "Web Developer with 1 years of experience.",
+    education: "B.Sc in Software Engineering, Kirinyaga University",
+    skills: "HTML, CSS, JavaScript, React",
+    work: "Frontend Developer at ABC Corp (2020–2024)",
+    contact: "Phone: +254115397267",
+    portfolio: "https://portfolio.example.com",
+    settings: "Notifications: On, Dark Mode: Off"
+  };
+    function loadSection(section) {
+      const content = document.getElementById('mainContent');
+
+      
+      switch (section){
+        case 'dashboard':
+        content.innerHTML = `
+          <h2>Dashboard</h2>
+          <p><strong>Name:</strong> ${data.name}</p>
+          <p><strong>Email:</strong> ${data.email}</p>
+          <p><strong>Bio:</strong> ${data.bio}</p>
+        `;
+        break;
+
+        case 'editProfile':
+        content.innerHTML = `
+          <h2>Edit Profile</h2>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="nameInput" value="${data.name}">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="emailInput" value="${data.email}">
+             </div>
+          <div class="form-group">
+            <label>Bio</label>
+            <textarea id="bioInput">${data.bio}</textarea>
+          </div>
+          <button onclick="saveProfile()">Save</button>
+        `;
+        break;
+
+        case 'education':
+        content.innerHTML = `
+          <h2>Education</h2>
+          <textarea id="educationInput">${data.education}</textarea>
+          <br>
+          <button onclick="saveSection('education')">Save</button>
+        `;
+
+         case 'skills':
+        content.innerHTML = `
+          <h2>Skills</h2>
+          <textarea id="skillsInput">${data.skills}</textarea>
+          <br>
+          <button onclick="saveSection('skills')">Save</button>
+        `;
+        break;
+
+        case 'Work':
+        content.innerHTML = `
+          <h2>Work Experience</h2>
+          <textarea id="workInput">${data.Work}</textarea>
+          <br>
+          <button onclick="saveSection('work')">Save</button>
+        `;
+        break;
+
+        case 'Contact':
+        content.innerHTML = `
+          <h2>Contact</h2>
+          <textarea id="contactInput">${data.Contact}</textarea>
+          <br>
+          <button onclick="saveSection('contact')">Save</button>
+        `;
+        break;
+
+        case 'Portfolio':
+        content.innerHTML = `
+          <h2>Portfolio</h2>
+          <input type="text" id="portfolioInput" value="${data.Portfolio}">
+          <br>
+          <button onclick="saveSection('portfolio')">Save</button>
+        `;
+        break;
+
+        case 'Settings':
+        content.innerHTML = `
+          <h2>Settings</h2>
+          <textarea id="settingsInput">${data.Settings}</textarea>
+          <br>
+          <button onclick="saveSection('settings')">Save</button>
+        `;
+        break;
+
+      default:
+        content.innerHTML = `<p>Section not found.</p>`;
+    }
+  }
+
+  function saveProfile() {
+    data.name = document.getElementById('nameInput').value;
+    data.email = document.getElementById('emailInput').value;
+    data.bio = document.getElementById('bioInput').value;
+    alert("Profile updated!");
+    loadSection('dashboard'); // Optional: return to dashboard view
+  }
+
+function saveSection(key) {
+    const inputId = key + "Input";
+    const newValue = document.getElementById(inputId).value;
+    data[key] = newValue;
+    alert(`${capitalize(key)} updated!`);
+  }
+
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  </script>
+    </body>
+</html>
