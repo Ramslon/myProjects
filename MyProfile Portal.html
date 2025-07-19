@@ -28,15 +28,16 @@
 
   <script>
 const data = {
+    photo: "https://via.placeholder.com/120", 
     name: "Ramson Lunayo",
     email: "ramsonlonayo@gmail.com",
     bio: "Web Developer with 1 years of experience.",
     education: "B.Sc in Software Engineering, Kirinyaga University",
     skills: "HTML, CSS, JavaScript, React",
-    work: "Frontend Developer at ABC Corp (2020–2024)",
-    contact: "Phone: +254115397267",
-    portfolio: "https://portfolio.example.com",
-    settings: "Notifications: On, Dark Mode: Off"
+    Work: "Frontend Developer at ABC Corp (2020–2024)",
+    Contact: "Phone: +254115397267",
+    Portfolio: "https://portfolio.example.com",
+    Settings: "Notifications: On, Dark Mode: Off"
   };
     function loadSection(section) {
       const content = document.getElementById('mainContent');
@@ -46,15 +47,51 @@ const data = {
         case 'dashboard':
         content.innerHTML = `
           <h2>Dashboard</h2>
-          <p><strong>Name:</strong> ${data.name}</p>
-          <p><strong>Email:</strong> ${data.email}</p>
-          <p><strong>Bio:</strong> ${data.bio}</p>
+          <div class="profile-summary">
+        
+        <img id="profilePhoto" src="${data.photo}" alt="Profile Photo" width="120" style="border-radius: 50%; margin-bottom: 10px;"><br>
+          <input type="file" id="photoInput" accept="image/*" onchange="previewPhoto(event)">
+        <span>Welcome, <input type="text" id="nameInput" value="${data.name}"></span>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Profile Status</h3>
+        <p>Profile 85% complete</p>
+      </div>
+
+      <div class="card">
+        <h3>Messages</h3>
+        <p>You have 2 new messages</p>
+      </div>
+
+      <div class="card">
+        <h3>Activity Log</h3>
+        <p>Last login: Today at 2:00 PM</p>
+      </div>
+
+      <div class="card">
+        <h3>Account Settings</h3>
+        <p>Update your email, password and more</p>
+      </div>
+    </div>
+
+    <footer>
+      © 2025 My Profile Portal | All rights reserved
+    </footer>
+  </div>
         `;
         break;
-
+         //switch(section){
         case 'editProfile':
         content.innerHTML = `
           <h2>Edit Profile</h2>
+          <div class="form-group">
+          <label>Profile Photo</label><br>
+          <img id="profilePhoto" src="${data.photo}" alt="Profile Photo" width="120" style="border-radius: 50%; margin-bottom: 10px;"><br>
+          <input type="file" id="photoInput" accept="image/*" onchange="previewPhoto(event)">
+          </div>
           <div class="form-group">
             <label>Name</label>
             <input type="text" id="nameInput" value="${data.name}">
@@ -93,7 +130,7 @@ const data = {
           <h2>Work Experience</h2>
           <textarea id="workInput">${data.Work}</textarea>
           <br>
-          <button onclick="saveSection('work')">Save</button>
+          <button onclick="saveSection('Work')">Save</button>
         `;
         break;
 
@@ -102,7 +139,7 @@ const data = {
           <h2>Contact</h2>
           <textarea id="contactInput">${data.Contact}</textarea>
           <br>
-          <button onclick="saveSection('contact')">Save</button>
+          <button onclick="saveSection('Contact')">Save</button>
         `;
         break;
 
@@ -111,7 +148,7 @@ const data = {
           <h2>Portfolio</h2>
           <input type="text" id="portfolioInput" value="${data.Portfolio}">
           <br>
-          <button onclick="saveSection('portfolio')">Save</button>
+          <button onclick="saveSection('Portfolio')">Save</button>
         `;
         break;
 
@@ -120,7 +157,7 @@ const data = {
           <h2>Settings</h2>
           <textarea id="settingsInput">${data.Settings}</textarea>
           <br>
-          <button onclick="saveSection('settings')">Save</button>
+          <button onclick="saveSection('Settings')">Save</button>
         `;
         break;
 
@@ -128,6 +165,15 @@ const data = {
         content.innerHTML = `<p>Section not found.</p>`;
     }
   }
+  function previewPhoto(event) {
+  const reader = new FileReader();
+  reader.onload = function () {
+    const photo = reader.result;
+    document.getElementById('profilePhoto').src = photo;
+    data.photo = photo; // Save in memory (you can persist it later)
+  };
+  reader.readAsDataURL(event.target.files[0]);
+}
 
   function saveProfile() {
     data.name = document.getElementById('nameInput').value;
